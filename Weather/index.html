@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Trebuchet MS', sans-serif;
+            background: linear-gradient(135deg, #1E2A3A 0%, #0a0a0a 100%);
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -21,21 +21,184 @@
             align-items: center;
         }
 
+        /* Intro Animation Overlay */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1E2A3A 0%, #0a0a0a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fadeOut 0.375s ease-out 2.625s forwards;
+        }
+
+        .intro-logo {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            animation: logoScale 1.5s ease-out forwards;
+        }
+
+        @keyframes logoScale {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .intro-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 4px solid;
+        }
+
+        .intro-ring-1 {
+            width: 200px;
+            height: 200px;
+            border-color: #3D5A80;
+            top: 0;
+            left: 0;
+            animation: expandRing 1.5s ease-out 1.125s forwards;
+        }
+
+        .intro-ring-2 {
+            width: 142px;
+            height: 142px;
+            border-color: #9D4EDD;
+            top: 29px;
+            left: 29px;
+            animation: expandRing 1.5s ease-out 1.275s forwards;
+        }
+
+        .intro-ring-3 {
+            width: 85px;
+            height: 85px;
+            border-color: #C77DFF;
+            top: 57.5px;
+            left: 57.5px;
+            background: #C77DFF;
+            box-shadow: 0 0 40px rgba(199, 125, 255, 0.8);
+            animation: expandRing 1.5s ease-out 1.425s forwards;
+        }
+
+        @keyframes expandRing {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
         .container {
             max-width: 900px;
             width: 100%;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.625s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
         .header {
             text-align: center;
             color: white;
             margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .logo {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+        
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .ring-1 {
+            width: 80px;
+            height: 80px;
+            border-color: #3D5A80;
+            top: 0;
+            left: 0;
+        }
+        
+        .ring-2 {
+            width: 57px;
+            height: 57px;
+            border-color: #9D4EDD;
+            top: 11.5px;
+            left: 11.5px;
+            animation-delay: 0.5s;
+        }
+        
+        .ring-3 {
+            width: 34px;
+            height: 34px;
+            border-color: #C77DFF;
+            top: 23px;
+            left: 23px;
+            background: #C77DFF;
+            animation-delay: 1s;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.6);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .header-text {
+            text-align: left;
         }
 
         .header h1 {
             font-size: 2.5em;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #9D4EDD, #C77DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            margin: 0;
+            color: #999;
         }
 
         .dashboard {
@@ -46,19 +209,77 @@
         }
 
         .card {
-            background: white;
+            background: #111;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 40px rgba(157, 78, 221, 0.3);
+            border: 1px solid #222;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            border-color: #9D4EDD;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 60px rgba(157, 78, 221, 0.6);
         }
 
         .weather-card {
             grid-column: 1 / -1;
+        }
+
+        .news-card {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        #newsContent {
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        #newsContent.fade-out {
+            opacity: 0;
+        }
+
+        .news-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .news-title {
+            font-size: 1.3em;
+            color: #C77DFF;
+            font-weight: bold;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .news-title:hover {
+            color: #E0B0FF;
+            text-decoration: underline;
+        }
+
+        .news-description {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .news-source {
+            color: #888;
+            font-size: 0.9em;
         }
 
         .search-box {
@@ -70,31 +291,38 @@
         input {
             flex: 1;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #333;
             border-radius: 8px;
             font-size: 1em;
             transition: border-color 0.3s;
+            background: #1a1a1a;
+            color: white;
         }
 
         input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #9D4EDD;
+        }
+
+        input::placeholder {
+            color: #666;
         }
 
         button {
             padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #9D4EDD 0%, #C77DFF 100%);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1em;
             font-weight: bold;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, transform 0.2s;
         }
 
         button:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         button:disabled {
@@ -107,15 +335,62 @@
         }
 
         .weather-icon {
-            font-size: 5em;
+            font-size: 8em;
             margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .weather-icon.sunny {
+            animation: spin 20s linear infinite, pulse-icon 2s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .weather-icon.cloudy {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .weather-icon.rainy {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .weather-icon.stormy {
+            animation: pulse-icon 0.5s ease-in-out infinite;
+        }
+
+        .weather-icon.snowy {
+            animation: float 5s ease-in-out infinite;
         }
 
         .temperature {
             font-size: 3em;
             font-weight: bold;
-            color: #333;
+            background: linear-gradient(135deg, #9D4EDD, #C77DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin: 10px 0;
+        }
+
+        .weather-display h2 {
+            color: #fff;
+        }
+
+        .weather-display p {
+            color: #999;
         }
 
         .weather-details {
@@ -125,23 +400,89 @@
             margin-top: 20px;
         }
 
+        .forecast-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #2a2a2a;
+        }
+
+        .forecast-title {
+            font-size: 1.3em;
+            color: #C77DFF;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .forecast-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .forecast-day {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .forecast-day:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.4);
+        }
+
+        .forecast-day-name {
+            font-size: 1em;
+            color: #C77DFF;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .forecast-icon {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+
+        .forecast-temp {
+            font-size: 1.1em;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .forecast-high {
+            color: #ff6b6b;
+        }
+
+        .forecast-low {
+            color: #4dabf7;
+        }
+
+        .forecast-condition {
+            font-size: 0.85em;
+            color: #888;
+            text-transform: capitalize;
+        }
+
         .detail-item {
             text-align: center;
             padding: 10px;
-            background: #f5f5f5;
+            background: #1a1a1a;
             border-radius: 8px;
+            border: 1px solid #2a2a2a;
         }
 
         .detail-label {
             font-size: 0.85em;
-            color: #666;
+            color: #888;
             margin-bottom: 5px;
         }
 
         .detail-value {
             font-size: 1.2em;
             font-weight: bold;
-            color: #333;
+            color: #C77DFF;
         }
 
         .quote-card, .fact-card {
@@ -160,7 +501,7 @@
 
         .card-title {
             font-size: 1.3em;
-            color: #667eea;
+            color: #C77DFF;
             font-weight: bold;
         }
 
@@ -179,35 +520,35 @@
         .quote-text {
             font-size: 1.4em;
             line-height: 1.6;
-            color: #333;
-            font-style: italic;
+            color: #ddd;
             margin-bottom: 15px;
         }
 
         .quote-author {
             text-align: right;
-            color: #666;
+            color: #999;
             font-weight: bold;
         }
 
         .fact-text {
-            font-size: 1.2em;
+            font-size: 1.4em;
             line-height: 1.6;
-            color: #333;
+            color: #ddd;
         }
 
         .loading {
             text-align: center;
-            color: #666;
+            color: #888;
             font-style: italic;
         }
 
         .error {
-            color: #e74c3c;
+            color: #ff6b6b;
             text-align: center;
             padding: 10px;
-            background: #ffebee;
+            background: rgba(255, 107, 107, 0.1);
             border-radius: 5px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -223,17 +564,45 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .forecast-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .header h1 {
                 font-size: 1.8em;
+            }
+
+            .header {
+                flex-direction: column;
+            }
+
+            .header-text {
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Intro Animation -->
+    <div class="intro-overlay">
+        <div class="intro-logo">
+            <div class="intro-ring intro-ring-1"></div>
+            <div class="intro-ring intro-ring-2"></div>
+            <div class="intro-ring intro-ring-3"></div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>🌤️ Weather & Wisdom Dashboard</h1>
-            <p>Your Personal Information Hub</p>
+            <div class="logo">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+            </div>
+            <div class="header-text">
+                <h1>🌤️ Weather & Wisdom Dashboard</h1>
+                <p>Your Personal Information Hub</p>
+            </div>
         </div>
 
         <div class="dashboard">
@@ -243,27 +612,33 @@
                     <button id="searchBtn" onclick="app.searchWeather()">Search</button>
                 </div>
                 <div id="weatherDisplay" class="weather-display">
-                    <div class="loading">Click Search to get weather data...</div>
+                    <div class="loading">Loading weather...</div>
                 </div>
             </div>
 
             <div class="card quote-card">
                 <div class="card-header">
-                    <div class="card-title">💭 Daily Quote</div>
+                    <div class="card-title">Daily Quote</div>
                     <button class="refresh-btn" onclick="app.refreshQuote()">Refresh</button>
                 </div>
                 <div id="quoteContent" class="content">
-                    <div class="loading">Click Refresh for a quote...</div>
+                    <div class="loading">Loading quote...</div>
                 </div>
             </div>
 
             <div class="card fact-card">
                 <div class="card-header">
-                    <div class="card-title">🎲 Random Fact</div>
+                    <div class="card-title">Random Fact</div>
                     <button class="refresh-btn" onclick="app.refreshFact()">Refresh</button>
                 </div>
                 <div id="factContent" class="content">
-                    <div class="loading">Click Refresh for a fact...</div>
+                    <div class="loading">Loading fact...</div>
+                </div>
+            </div>
+
+            <div class="card news-card">
+                <div id="newsContent" style="display: flex; gap: 20px; align-items: center; width: 100%;">
+                    <div class="loading">Loading news...</div>
                 </div>
             </div>
         </div>
@@ -272,6 +647,11 @@
     <script>
         // ==================== DATA LAYER ====================
         const DataLayer = {
+            // API Keys
+            WEATHER_API_KEY: 'c2263fbea7ab4fda976193837250310',
+            NEWS_API_KEY: 'f651b8f9d02544c28a0dd2a6c48ebfca',
+
+            // Fallback weather database
             weatherDatabase: {
                 'rochester': {
                     name: 'Rochester',
@@ -335,10 +715,122 @@
                     main: { temp: 30, feels_like: 35, humidity: 85, pressure: 1009 },
                     weather: [{ description: 'thunderstorm', icon: '11d' }],
                     wind: { speed: 5.0 }
+                },
+                'los angeles': {
+                    name: 'Los Angeles',
+                    sys: { country: 'US' },
+                    main: { temp: 26, feels_like: 25, humidity: 60, pressure: 1015 },
+                    weather: [{ description: 'sunny', icon: '01d' }],
+                    wind: { speed: 3.8 }
+                },
+                'chicago': {
+                    name: 'Chicago',
+                    sys: { country: 'US' },
+                    main: { temp: 16, feels_like: 14, humidity: 70, pressure: 1012 },
+                    weather: [{ description: 'cloudy', icon: '03d' }],
+                    wind: { speed: 6.2 }
                 }
             },
 
-            quotes: [
+            // Real Weather API with fallback
+            async fetchWeather(city) {
+                try {
+                    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.WEATHER_API_KEY}&units=metric`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error('API failed');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    // Fallback to local data
+                    console.log('Using fallback weather data');
+                    const normalizedCity = city.toLowerCase().trim();
+                    const data = this.weatherDatabase[normalizedCity];
+                    if (!data) {
+                        throw new Error('City not found');
+                    }
+                    return data;
+                }
+            },
+
+            // 5-Day Forecast - Simple and reliable
+            async fetchForecast(city) {
+                // Generate 5 days of forecast
+                const normalizedCity = city.toLowerCase().trim();
+                const currentWeather = this.weatherDatabase[normalizedCity];
+                const baseTemp = currentWeather ? currentWeather.main.temp : 20;
+                
+                const conditions = [
+                    { icon: '01d', desc: 'sunny' },
+                    { icon: '02d', desc: 'partly cloudy' },
+                    { icon: '03d', desc: 'cloudy' },
+                    { icon: '04d', desc: 'overcast' },
+                    { icon: '09d', desc: 'rainy' },
+                    { icon: '10d', desc: 'light rain' },
+                    { icon: '13d', desc: 'snow' }
+                ];
+                
+                const forecasts = [];
+                const today = new Date();
+                
+                for (let i = 1; i <= 5; i++) {
+                    const forecastDate = new Date(today);
+                    forecastDate.setDate(today.getDate() + i);
+                    
+                    const tempVar = (Math.random() - 0.5) * 10;
+                    const condition = conditions[Math.floor(Math.random() * conditions.length)];
+                    
+                    forecasts.push({
+                        day: forecastDate.toLocaleDateString('en-US', { weekday: 'short' }),
+                        icon: condition.icon,
+                        high: Math.round(baseTemp + tempVar + 5),
+                        low: Math.round(baseTemp + tempVar - 3),
+                        condition: condition.desc
+                    });
+                }
+                
+                return forecasts;
+            },
+
+            // Real Quote API (quotable.io - no key needed)
+            async fetchQuote() {
+                try {
+                    const url = 'https://api.quotable.io/random';
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch quote');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    // Fallback to local quotes if API fails
+                    return this.getLocalQuote();
+                }
+            },
+
+            // News with better images
+            async fetchNews() {
+                try {
+                    const url = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.NEWS_API_KEY}&pageSize=5`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch news');
+                    }
+                    const data = await response.json();
+                    // Filter for articles with images
+                    const articlesWithImages = data.articles.filter(article => article.urlToImage);
+                    if (articlesWithImages.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * articlesWithImages.length);
+                        return articlesWithImages[randomIndex];
+                    }
+                    return data.articles[0];
+                } catch (error) {
+                    // Fallback to local news if API fails
+                    return this.getLocalNews();
+                }
+            },
+
+            // Fallback local quotes
+            localQuotes: [
                 { content: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
                 { content: "Innovation distinguishes between a leader and a follower.", author: "Steve Jobs" },
                 { content: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
@@ -351,6 +843,12 @@
                 { content: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" }
             ],
 
+            getLocalQuote() {
+                const randomIndex = Math.floor(Math.random() * this.localQuotes.length);
+                return this.localQuotes[randomIndex];
+            },
+
+            // Fallback local facts
             facts: [
                 { text: "Honey never spoils. Archaeologists have found 3000-year-old honey in Egyptian tombs that was still perfectly edible." },
                 { text: "A group of flamingos is called a 'flamboyance'." },
@@ -364,37 +862,60 @@
                 { text: "The human brain uses approximately 20% of the body's energy despite being only 2% of body mass." }
             ],
 
-            async simulateApiCall(data, delay = 500) {
+            async fetchFact() {
+                const randomIndex = Math.floor(Math.random() * this.facts.length);
                 return new Promise((resolve) => {
-                    setTimeout(() => resolve(data), delay);
+                    setTimeout(() => resolve(this.facts[randomIndex]), 300);
                 });
             },
 
-            async fetchWeather(city) {
-                const normalizedCity = city.toLowerCase().trim();
-                const data = this.weatherDatabase[normalizedCity];
-                
-                if (!data) {
-                    throw new Error('City not found');
+            // Fallback local news with better images
+            localNews: [
+                {
+                    title: "AI Revolution Transforms Technology Industry",
+                    description: "Artificial intelligence continues to reshape how we work, learn, and interact with technology in unprecedented ways.",
+                    urlToImage: "https://picsum.photos/400/250?random=1",
+                    source: { name: "Tech Daily" },
+                    url: "https://www.example.com/ai-revolution"
+                },
+                {
+                    title: "Space Exploration Reaches New Milestones",
+                    description: "Recent missions to Mars and beyond mark historic achievements in humanity's quest to explore the cosmos.",
+                    urlToImage: "https://picsum.photos/400/250?random=2",
+                    source: { name: "Space News" },
+                    url: "https://www.example.com/space-exploration"
+                },
+                {
+                    title: "Breakthrough in Renewable Energy Technology",
+                    description: "Scientists develop more efficient solar panels that could revolutionize clean energy production worldwide.",
+                    urlToImage: "https://picsum.photos/400/250?random=3",
+                    source: { name: "Green Tech" },
+                    url: "https://www.example.com/renewable-energy"
+                },
+                {
+                    title: "Quantum Computing Makes Major Advances",
+                    description: "New quantum processors demonstrate capabilities that far exceed traditional computing systems.",
+                    urlToImage: "https://picsum.photos/400/250?random=4",
+                    source: { name: "Science Today" },
+                    url: "https://www.example.com/quantum-computing"
+                },
+                {
+                    title: "Medical Research Unveils Promising Treatments",
+                    description: "Innovative approaches to disease treatment offer hope for millions of patients worldwide.",
+                    urlToImage: "https://picsum.photos/400/250?random=5",
+                    source: { name: "Health News" },
+                    url: "https://www.example.com/medical-research"
                 }
-                
-                return await this.simulateApiCall(data);
-            },
+            ],
 
-            async fetchQuote() {
-                const randomIndex = Math.floor(Math.random() * this.quotes.length);
-                return await this.simulateApiCall(this.quotes[randomIndex], 300);
-            },
-
-            async fetchFact() {
-                const randomIndex = Math.floor(Math.random() * this.facts.length);
-                return await this.simulateApiCall(this.facts[randomIndex], 300);
+            getLocalNews() {
+                const randomIndex = Math.floor(Math.random() * this.localNews.length);
+                return this.localNews[randomIndex];
             }
         };
 
         // ==================== PROCESSING LAYER ====================
         const ProcessingLayer = {
-            // Convert Celsius to Fahrenheit
             formatTemperature(tempCelsius) {
                 const tempFahrenheit = (tempCelsius * 9/5) + 32;
                 return Math.round(tempFahrenheit);
@@ -402,27 +923,38 @@
 
             getWeatherIcon(weatherCode) {
                 const icons = {
-                    '01d': '☀️', '01n': '🌙',
-                    '02d': '⛅', '02n': '☁️',
-                    '03d': '☁️', '03n': '☁️',
-                    '04d': '☁️', '04n': '☁️',
-                    '09d': '🌧️', '09n': '🌧️',
-                    '10d': '🌦️', '10n': '🌧️',
-                    '11d': '⛈️', '11n': '⛈️',
-                    '13d': '❄️', '13n': '❄️',
-                    '50d': '🌫️', '50n': '🌫️'
+                    '01d': { emoji: '☀️', class: 'sunny' },
+                    '01n': { emoji: '🌙', class: 'cloudy' },
+                    '02d': { emoji: '⛅', class: 'cloudy' },
+                    '02n': { emoji: '☁️', class: 'cloudy' },
+                    '03d': { emoji: '☁️', class: 'cloudy' },
+                    '03n': { emoji: '☁️', class: 'cloudy' },
+                    '04d': { emoji: '☁️', class: 'cloudy' },
+                    '04n': { emoji: '☁️', class: 'cloudy' },
+                    '09d': { emoji: '🌧️', class: 'rainy' },
+                    '09n': { emoji: '🌧️', class: 'rainy' },
+                    '10d': { emoji: '🌦️', class: 'rainy' },
+                    '10n': { emoji: '🌧️', class: 'rainy' },
+                    '11d': { emoji: '⛈️', class: 'stormy' },
+                    '11n': { emoji: '⛈️', class: 'stormy' },
+                    '13d': { emoji: '❄️', class: 'snowy' },
+                    '13n': { emoji: '❄️', class: 'snowy' },
+                    '50d': { emoji: '🌫️', class: 'cloudy' },
+                    '50n': { emoji: '🌫️', class: 'cloudy' }
                 };
-                return icons[weatherCode] || '🌡️';
+                return icons[weatherCode] || { emoji: '🌡️', class: 'cloudy' };
             },
 
             processWeatherData(data) {
+                const iconData = this.getWeatherIcon(data.weather[0].icon);
                 return {
                     city: data.name,
                     country: data.sys.country,
                     temperature: this.formatTemperature(data.main.temp),
                     feelsLike: this.formatTemperature(data.main.feels_like),
                     description: data.weather[0].description,
-                    icon: this.getWeatherIcon(data.weather[0].icon),
+                    icon: iconData.emoji,
+                    iconClass: iconData.class,
                     humidity: data.main.humidity,
                     windSpeed: Math.round(data.wind.speed * 3.6),
                     pressure: data.main.pressure
@@ -440,6 +972,30 @@
                 return {
                     text: data.text
                 };
+            },
+
+            processNewsData(data) {
+                return {
+                    title: data.title,
+                    description: data.description || 'No description available.',
+                    image: data.urlToImage || 'https://via.placeholder.com/400x250/9D4EDD/ffffff?text=News',
+                    source: data.source?.name || 'Unknown Source',
+                    url: data.url || '#'
+                };
+            },
+
+            processForecastData(forecastArray) {
+                // Data is already processed, just need to convert temps and add icons
+                return forecastArray.map(day => {
+                    const iconData = this.getWeatherIcon(day.icon);
+                    return {
+                        day: day.day,
+                        icon: iconData.emoji,
+                        high: this.formatTemperature(day.high),
+                        low: this.formatTemperature(day.low),
+                        condition: day.condition
+                    };
+                });
             }
         };
 
@@ -447,10 +1003,10 @@
         const UILayer = {
             renderWeather(weatherData) {
                 const html = `
-                    <div class="weather-icon">${weatherData.icon}</div>
+                    <div class="weather-icon ${weatherData.iconClass}">${weatherData.icon}</div>
                     <h2>${weatherData.city}, ${weatherData.country}</h2>
                     <div class="temperature">${weatherData.temperature}°F</div>
-                    <p style="color: #666; font-size: 1.2em; text-transform: capitalize;">${weatherData.description}</p>
+                    <p style="font-size: 1.2em; text-transform: capitalize;">${weatherData.description}</p>
                     <div class="weather-details">
                         <div class="detail-item">
                             <div class="detail-label">Feels Like</div>
@@ -480,6 +1036,54 @@
             renderFact(factData) {
                 const html = `<div class="fact-text">${factData.text}</div>`;
                 document.getElementById('factContent').innerHTML = html;
+            },
+
+            renderNews(newsData) {
+                const newsElement = document.getElementById('newsContent');
+                
+                // Fade out
+                newsElement.classList.add('fade-out');
+                
+                // Wait for fade out, then update content and fade in
+                setTimeout(() => {
+                    const html = `
+                        <img src="${newsData.image}" alt="News image" class="news-image" onerror="this.src='https://via.placeholder.com/400x250/9D4EDD/ffffff?text=News'">
+                        <div class="news-content">
+                            <a href="${newsData.url}" target="_blank" class="news-title">${newsData.title}</a>
+                            <div class="news-description">${newsData.description}</div>
+                            <div class="news-source">Source: ${newsData.source}</div>
+                        </div>
+                    `;
+                    newsElement.innerHTML = html;
+                    
+                    // Fade in
+                    setTimeout(() => {
+                        newsElement.classList.remove('fade-out');
+                    }, 50);
+                }, 800);
+            },
+
+            renderForecast(forecastData) {
+                const forecastDisplay = document.getElementById('forecastDisplay');
+                
+                if (!forecastData || forecastData.length === 0) {
+                    forecastDisplay.innerHTML = '<div class="loading">Unable to load forecast</div>';
+                    return;
+                }
+                
+                const html = forecastData.map(day => `
+                    <div class="forecast-day">
+                        <div class="forecast-day-name">${day.day}</div>
+                        <div class="forecast-icon">${day.icon}</div>
+                        <div class="forecast-temp">
+                            <span class="forecast-high">${day.high}°</span> / 
+                            <span class="forecast-low">${day.low}°</span>
+                        </div>
+                        <div class="forecast-condition">${day.condition}</div>
+                    </div>
+                `).join('');
+                
+                forecastDisplay.innerHTML = html;
             },
 
             showLoading(elementId) {
@@ -543,10 +1147,28 @@
                 }
             },
 
+            async refreshNews() {
+                UILayer.showLoading('newsContent');
+                
+                try {
+                    const rawData = await DataLayer.fetchNews();
+                    const processedData = ProcessingLayer.processNewsData(rawData);
+                    UILayer.renderNews(processedData);
+                } catch (error) {
+                    UILayer.showError('newsContent', 'Failed to load news. Try again.');
+                }
+            },
+
             init() {
                 this.searchWeather();
                 this.refreshQuote();
                 this.refreshFact();
+                this.refreshNews();
+
+                // Auto-refresh news every 25 seconds
+                setInterval(() => {
+                    this.refreshNews();
+                }, 25000);
 
                 document.getElementById('cityInput').addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
