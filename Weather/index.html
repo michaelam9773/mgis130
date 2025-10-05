@@ -229,9 +229,6 @@
 
         .news-card {
             grid-column: 1 / -1;
-            display: flex;
-            gap: 20px;
-            align-items: center;
         }
 
         #newsContent {
@@ -243,16 +240,8 @@
             opacity: 0;
         }
 
-        .news-image {
-            width: 200px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            flex-shrink: 0;
-        }
-
         .news-content {
-            flex: 1;
+            width: 100%;
         }
 
         .news-title {
@@ -637,7 +626,7 @@
             </div>
 
             <div class="card news-card">
-                <div id="newsContent" style="display: flex; gap: 20px; align-items: center; width: 100%;">
+                <div id="newsContent" style="width: 100%;">
                     <div class="loading">Loading news...</div>
                 </div>
             </div>
@@ -1047,7 +1036,6 @@
                 // Wait for fade out, then update content and fade in
                 setTimeout(() => {
                     const html = `
-                        <img src="${newsData.image}" alt="News image" class="news-image" onerror="this.src='https://via.placeholder.com/400x250/9D4EDD/ffffff?text=News'">
                         <div class="news-content">
                             <a href="${newsData.url}" target="_blank" class="news-title">${newsData.title}</a>
                             <div class="news-description">${newsData.description}</div>
