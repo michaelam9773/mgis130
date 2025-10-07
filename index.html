@@ -621,12 +621,16 @@
         function loadData() {
             try {
                 const saved = localStorage.getItem('studyPlannerData');
+                console.log('Loading data from localStorage:', saved);
                 if (saved) {
-                    return JSON.parse(saved);
+                    const parsed = JSON.parse(saved);
+                    console.log('Parsed data:', parsed);
+                    return parsed;
                 }
             } catch (e) {
                 console.error('Error loading data:', e);
             }
+            console.log('No saved data found, using defaults');
             return {
                 sessions: [],
                 assignments: [],
